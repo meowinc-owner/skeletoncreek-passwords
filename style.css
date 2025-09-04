@@ -3,25 +3,24 @@
     |   Skeleton Creek Passkeys - Styles   |
     ========================================
     
-    A complete redesign with a vintage, mysterious journal theme.
-    The new structure resolves the scroll bounce and offers a
-    fresh, cohesive aesthetic.
+    A complete redesign with a sleek, modern, and futuristic theme.
+    This stylesheet is a full rewrite, ready to be dropped into
+    the existing HTML structure.
 */
 
 /* === Font Imports === */
-@import url('https://fonts.googleapis.com/css2?family=Creepster&family=Special+Elite&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&family=Orbitron:wght@400;700&display=swap');
 
 /* === Root Variables & Global Resets === */
 :root {
-    --page-bg: #f5f0e1; /* Faded parchment color */
-    --main-text-color: #333; /* Dark ink color */
-    --secondary-text-color: #666; /* Lighter shade of ink */
-    --border-color: #8b4513; /* Saddle brown for a worn look */
-    --accent-color: #a52a2a; /* Muted red for highlights */
-    --highlight-glow: rgba(165, 42, 42, 0.4);
-    --shadow-color: rgba(0, 0, 0, 0.2);
-    --radius: 3px;
-    --paper-texture-url: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity=".1"><path d="M0,0 H100 V100 H0 Z" fill="none" stroke="%23888" stroke-width="0.5" /><path d="M0,50 H100 M50,0 V100" stroke="%23888" stroke-width="0.5" /></svg>');
+    --dark-bg: #0d0d0d;
+    --main-bg: #1a1a1a;
+    --text-color: #e0e0e0;
+    --accent-color: #00ffff; /* Electric Cyan */
+    --secondary-accent: #00aaff; /* Bright Blue */
+    --border-color: #444;
+    --shadow-color: rgba(0, 0, 0, 0.7);
+    --radius: 2px;
 }
 
 *, *::before, *::after {
@@ -34,87 +33,86 @@ html {
     font-size: 16px;
 }
 
-/* === Body & Background === */
+/* === Body & Scroll Container === */
 body {
-    background-color: #222; /* Dark outside the scrollable area */
-    color: var(--main-text-color);
-    font-family: 'Special Elite', cursive; /* Typewriter-style font */
+    background-color: var(--dark-bg);
+    color: var(--text-color);
+    font-family: 'Roboto Mono', monospace;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     padding: 0;
-    overflow: hidden; /* FIX: Prevents the body from scrolling and eliminates bounceback */
+    overflow: hidden;
 }
 
 .scrollable-content {
     width: 100%;
     height: 100vh;
-    overflow-y: auto; /* Handles all scrolling */
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
-    background-color: var(--page-bg);
-    background-image: var(--paper-texture-url);
-    border: 5px solid var(--border-color);
+    background-color: var(--main-bg);
+    border: 1px solid var(--border-color);
     box-shadow: 0 0 50px rgba(0,0,0,0.6);
     position: relative;
+    padding: 20px;
 }
 
-/* Custom scrollbar for a cleaner look */
+/* Custom scrollbar for a sleek look */
 .scrollable-content::-webkit-scrollbar {
     width: 8px;
-}
-
-.scrollable-content::-webkit-scrollbar-track {
-    background: var(--page-bg);
+    background-color: var(--main-bg);
 }
 
 .scrollable-content::-webkit-scrollbar-thumb {
-    background-color: var(--border-color);
+    background-color: var(--accent-color);
     border-radius: 4px;
-    border: 1px solid var(--page-bg);
+    border: 1px solid var(--main-bg);
 }
 
-/* === Main Container === */
+/* === Main Container & Layout === */
 .container {
     width: 95%;
-    max-width: 800px;
+    max-width: 900px;
     margin: 40px auto;
     padding: clamp(20px, 5vw, 40px);
     background: transparent;
-    border-radius: var(--radius);
     position: relative;
     animation: fadeIn 1s ease-out;
 }
 
-/* === Titles and Typography === */
+/* === Titles & Typography === */
 .journal-title {
-    font-family: 'Creepster', cursive;
-    font-size: clamp(3rem, 8vw, 5rem);
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
     text-align: center;
     color: var(--accent-color);
     margin-bottom: 20px;
-    text-shadow: 2px 2px var(--main-text-color);
-    letter-spacing: 2px;
-    animation: bleed-in 2s ease-out;
+    text-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
+    letter-spacing: 3px;
+    animation: title-glow 3s infinite alternate;
 }
 
 .sub-title {
-    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-family: 'Roboto Mono', monospace;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
     text-align: center;
-    color: var(--secondary-text-color);
+    color: var(--text-color);
     margin-bottom: 30px;
 }
 
 .page-title {
     font-size: clamp(2rem, 5vw, 3.5rem);
     margin-bottom: 40px;
+    text-align: center;
 }
 
 .entry-text {
-    line-height: 1.8;
-    color: var(--main-text-color);
+    line-height: 1.6;
+    color: var(--text-color);
     margin-bottom: 20px;
+    text-align: center;
 }
 
 .home-entry {
@@ -122,7 +120,7 @@ body {
     margin: 0 auto 30px auto;
 }
 
-/* === Buttons === */
+/* === Buttons & Links === */
 .btn-container {
     display: flex;
     flex-direction: column;
@@ -133,26 +131,25 @@ body {
 
 .btn {
     display: inline-block;
-    padding: 12px 25px;
-    background-color: var(--border-color);
-    color: var(--page-bg);
+    padding: 15px 30px;
+    background: linear-gradient(45deg, var(--secondary-accent), var(--accent-color));
+    color: var(--main-bg);
     text-decoration: none;
     border-radius: var(--radius);
     font-weight: bold;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     transition: all 0.3s ease-in-out;
-    box-shadow: 0 4px 10px var(--shadow-color);
-    border: 1px solid var(--border-color);
+    box-shadow: 0 0 15px var(--accent-color);
+    border: 1px solid var(--accent-color);
     width: clamp(200px, 50%, 300px);
     text-align: center;
 }
 
 .btn:hover {
-    background-color: var(--accent-color);
-    border-color: var(--accent-color);
-    transform: translateY(-3px) scale(1.03);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(45deg, var(--accent-color), var(--secondary-accent));
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 0 25px var(--accent-color);
 }
 
 .back-btn {
@@ -167,25 +164,25 @@ body {
 
 .back-btn:hover {
     transform: translateX(-5px);
-    color: var(--border-color);
+    color: var(--text-color);
 }
 
 /* === Video List === */
 .video-list {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    border: 1px solid var(--border-color);
+    gap: 20px;
     padding: 20px;
-    border-radius: var(--radius);
-    background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white to mimic paper */
-    box-shadow: 0 5px 15px var(--shadow-color);
+    border: 1px solid var(--border-color);
+    background-color: rgba(26, 26, 26, 0.5); /* Semi-transparent bg */
 }
 
 .video-list li {
     padding: 15px;
-    border-bottom: 1px dashed var(--secondary-text-color);
+    border-bottom: 1px dashed var(--border-color);
     transition: background-color 0.2s ease;
+    display: flex;
+    flex-direction: column;
 }
 
 .video-list li:last-child {
@@ -193,13 +190,13 @@ body {
 }
 
 .video-list li:hover {
-    background-color: rgba(0, 0, 0, 0.05); /* Subtle hover effect */
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
 .passkey {
     display: block;
     font-weight: 700;
-    color: var(--accent-color);
+    color: var(--secondary-accent);
     font-size: 1.1rem;
     margin-bottom: 5px;
     text-transform: uppercase;
@@ -207,9 +204,8 @@ body {
 }
 
 .video-link {
-    color: var(--main-text-color);
-    text-decoration: underline;
-    text-decoration-color: var(--secondary-text-color);
+    color: var(--text-color);
+    text-decoration: none;
     font-size: 0.9rem;
     word-wrap: break-word;
     transition: color 0.3s ease;
@@ -221,10 +217,10 @@ body {
 
 .description {
     font-style: italic;
-    color: var(--secondary-text-color);
+    color: #888;
     margin-top: 10px;
     font-size: 0.8rem;
-    border-top: 1px dashed var(--secondary-text-color);
+    border-top: 1px dashed var(--border-color);
     padding-top: 10px;
 }
 
@@ -234,15 +230,11 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes bleed-in {
-    0% {
-        transform: scale(0.95);
-        opacity: 0;
-        filter: blur(5px);
+@keyframes title-glow {
+    0%, 100% {
+        text-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
     }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-        filter: blur(0);
+    50% {
+        text-shadow: 0 0 20px var(--accent-color), 0 0 40px var(--accent-color);
     }
 }
