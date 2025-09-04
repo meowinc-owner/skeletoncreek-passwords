@@ -1,26 +1,20 @@
 /*
     ========================================
-    |   Skeleton Creek Passkeys - Styles   |
+    |   SKELETON CREEK PASSKEYS - STYLES   |
     ========================================
     
-    A complete redesign with a sleek, modern, and futuristic theme.
-    This stylesheet is a full rewrite, ready to be dropped into
-    the existing HTML structure.
+    A completely new, brutalist-inspired design.
+    This stylesheet is stark, simple, and functional.
 */
 
-/* === Font Imports === */
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&family=Orbitron:wght@400;700&display=swap');
-
-/* === Root Variables & Global Resets === */
+/* === GLOBAL STYLES === */
 :root {
-    --dark-bg: #0d0d0d;
-    --main-bg: #1a1a1a;
-    --text-color: #e0e0e0;
-    --accent-color: #00ffff; /* Electric Cyan */
-    --secondary-accent: #00aaff; /* Bright Blue */
-    --border-color: #444;
-    --shadow-color: rgba(0, 0, 0, 0.7);
-    --radius: 2px;
+    --bg-color: #f0f0f0;
+    --text-color: #1a1a1a;
+    --accent-color: #e63946; /* A bold, striking red */
+    --border-color: #1a1a1a;
+    --border-thickness: 3px;
+    --font-primary: 'Roboto Mono', monospace;
 }
 
 *, *::before, *::after {
@@ -29,212 +23,133 @@
     padding: 0;
 }
 
-html {
-    font-size: 16px;
-}
-
-/* === Body & Scroll Container === */
-body {
-    background-color: var(--dark-bg);
-    color: var(--text-color);
-    font-family: 'Roboto Mono', monospace;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 0;
-    overflow: hidden;
-}
-
-.scrollable-content {
+html, body {
     width: 100%;
-    height: 100vh;
-    overflow-y: auto;
+    min-height: 100vh;
+    font-size: 16px;
+    font-family: var(--font-primary);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    text-transform: uppercase;
+    line-height: 1.5;
+    overflow-x: hidden;
+}
+
+/* FIX: Removes scroll bounce by setting body to full viewport height and allowing it to scroll naturally */
+body {
     -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
-    background-color: var(--main-bg);
-    border: 1px solid var(--border-color);
-    box-shadow: 0 0 50px rgba(0,0,0,0.6);
-    position: relative;
-    padding: 20px;
+    overscroll-behavior-y: contain; /* Prevents scroll bounce on supported devices */
 }
 
-/* Custom scrollbar for a sleek look */
-.scrollable-content::-webkit-scrollbar {
-    width: 8px;
-    background-color: var(--main-bg);
-}
-
-.scrollable-content::-webkit-scrollbar-thumb {
-    background-color: var(--accent-color);
-    border-radius: 4px;
-    border: 1px solid var(--main-bg);
-}
-
-/* === Main Container & Layout === */
+/* === LAYOUT === */
 .container {
-    width: 95%;
+    width: 90%;
     max-width: 900px;
     margin: 40px auto;
-    padding: clamp(20px, 5vw, 40px);
-    background: transparent;
-    position: relative;
+    padding: 20px;
+    border: var(--border-thickness) solid var(--border-color);
+}
+
+.home-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
+    align-content: center;
+    text-align: center;
+    min-height: calc(100vh - 80px); /* Fill the viewport height minus margin */
+}
+
+/* === TYPOGRAPHY === */
+.main-title {
+    font-size: clamp(2rem, 8vw, 4rem);
+    border-bottom: var(--border-thickness) solid var(--border-color);
+    padding-bottom: 10px;
     animation: fadeIn 1s ease-out;
 }
 
-/* === Titles & Typography === */
-.journal-title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
-    text-align: center;
-    color: var(--accent-color);
-    margin-bottom: 20px;
-    text-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
-    letter-spacing: 3px;
-    animation: title-glow 3s infinite alternate;
-}
-
-.sub-title {
-    font-family: 'Roboto Mono', monospace;
-    font-size: clamp(1rem, 2.5vw, 1.5rem);
-    text-align: center;
-    color: var(--text-color);
-    margin-bottom: 30px;
+.intro-text {
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    animation: fadeIn 1.5s ease-out;
 }
 
 .page-title {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    margin-bottom: 40px;
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
     text-align: center;
+    margin-bottom: 30px;
+    border-bottom: var(--border-thickness) solid var(--border-color);
+    padding-bottom: 10px;
 }
 
-.entry-text {
-    line-height: 1.6;
-    color: var(--text-color);
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.home-entry {
-    max-width: 600px;
-    margin: 0 auto 30px auto;
-}
-
-/* === Buttons & Links === */
-.btn-container {
+/* === LINKS & LISTS === */
+.link-list {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    align-items: center;
-    margin-top: 30px;
+    gap: 15px;
+    margin-top: 20px;
 }
 
-.btn {
-    display: inline-block;
-    padding: 15px 30px;
-    background: linear-gradient(45deg, var(--secondary-accent), var(--accent-color));
-    color: var(--main-bg);
-    text-decoration: none;
-    border-radius: var(--radius);
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 0 15px var(--accent-color);
-    border: 1px solid var(--accent-color);
-    width: clamp(200px, 50%, 300px);
-    text-align: center;
-}
-
-.btn:hover {
-    background: linear-gradient(45deg, var(--accent-color), var(--secondary-accent));
-    transform: translateY(-2px) scale(1.03);
-    box-shadow: 0 0 25px var(--accent-color);
-}
-
-.back-btn {
-    color: var(--accent-color);
-    text-decoration: none;
-    font-weight: bold;
-    display: inline-block;
-    margin-bottom: 20px;
-    transition: transform 0.2s ease, color 0.2s ease;
-    font-size: 1rem;
-}
-
-.back-btn:hover {
-    transform: translateX(-5px);
-    color: var(--text-color);
-}
-
-/* === Video List === */
-.video-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 20px;
-    border: 1px solid var(--border-color);
-    background-color: rgba(26, 26, 26, 0.5); /* Semi-transparent bg */
-}
-
-.video-list li {
+.link-item, .back-link {
+    display: block;
     padding: 15px;
-    border-bottom: 1px dashed var(--border-color);
-    transition: background-color 0.2s ease;
-    display: flex;
-    flex-direction: column;
+    font-size: 1.1rem;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    border: var(--border-thickness) solid var(--border-color);
+    text-decoration: none;
+    transition: all 0.2s ease-out;
 }
 
-.video-list li:last-child {
+.link-item:hover, .back-link:hover {
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    transform: translate(-3px, -3px);
+    box-shadow: 3px 3px 0 var(--border-color);
+}
+
+.video-index {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.video-entry {
+    border-bottom: 1px solid #ccc;
+    padding: 15px 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-gap: 10px;
+    align-items: center;
+}
+
+.video-entry:last-child {
     border-bottom: none;
 }
 
-.video-list li:hover {
-    background-color: rgba(0, 0, 0, 0.2);
-}
-
 .passkey {
-    display: block;
-    font-weight: 700;
-    color: var(--secondary-accent);
-    font-size: 1.1rem;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    font-weight: bold;
+    color: var(--accent-color);
+    white-space: nowrap;
 }
 
 .video-link {
     color: var(--text-color);
     text-decoration: none;
-    font-size: 0.9rem;
-    word-wrap: break-word;
-    transition: color 0.3s ease;
+    word-break: break-all;
+    transition: color 0.2s ease;
 }
 
 .video-link:hover {
     color: var(--accent-color);
+    text-decoration: underline;
 }
 
-.description {
-    font-style: italic;
-    color: #888;
-    margin-top: 10px;
-    font-size: 0.8rem;
-    border-top: 1px dashed var(--border-color);
-    padding-top: 10px;
+.back-link {
+    margin-top: 40px;
+    text-align: center;
 }
 
-/* === Animations === */
+/* === ANIMATIONS === */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes title-glow {
-    0%, 100% {
-        text-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
-    }
-    50% {
-        text-shadow: 0 0 20px var(--accent-color), 0 0 40px var(--accent-color);
-    }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
