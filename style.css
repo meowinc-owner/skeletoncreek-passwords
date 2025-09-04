@@ -3,27 +3,25 @@
     |   Skeleton Creek Passkeys - Styles   |
     ========================================
     
-    This CSS file has been completely re-engineered to fix the scroll
-    bounce and provide a fresh, cohesive design with new animations.
+    A complete redesign with a vintage, mysterious journal theme.
+    The new structure resolves the scroll bounce and offers a
+    fresh, cohesive aesthetic.
 */
 
 /* === Font Imports === */
-@import url('https://fonts.googleapis.com/css2?family=Creepster&family=Roboto+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=Special+Elite&display=swap');
 
 /* === Root Variables & Global Resets === */
 :root {
-    --dark-bg: #030303;
-    --main-bg: #0f0f0f;
-    --text-color: #e0e0e0;
-    --accent-color: #6a0dad; /* A deep purple */
-    --highlight-color: #c900c9; /* Bright magenta for key elements */
-    --shadow-color: rgba(0, 0, 0, 0.7);
-    --border-color: #333;
-    --radius: 6px;
-    --glitch-color-1: #00ffc8;
-    --glitch-color-2: #ff0077;
-    --pulse-speed: 2.5s;
-    --glitch-speed: 0.8s;
+    --page-bg: #f5f0e1; /* Faded parchment color */
+    --main-text-color: #333; /* Dark ink color */
+    --secondary-text-color: #666; /* Lighter shade of ink */
+    --border-color: #8b4513; /* Saddle brown for a worn look */
+    --accent-color: #a52a2a; /* Muted red for highlights */
+    --highlight-glow: rgba(165, 42, 42, 0.4);
+    --shadow-color: rgba(0, 0, 0, 0.2);
+    --radius: 3px;
+    --paper-texture-url: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity=".1"><path d="M0,0 H100 V100 H0 Z" fill="none" stroke="%23888" stroke-width="0.5" /><path d="M0,50 H100 M50,0 V100" stroke="%23888" stroke-width="0.5" /></svg>');
 }
 
 *, *::before, *::after {
@@ -38,83 +36,74 @@ html {
 
 /* === Body & Background === */
 body {
-    background-color: var(--dark-bg);
-    color: var(--text-color);
-    font-family: 'Roboto Mono', monospace; /* New monospace font for a tech-horror feel */
+    background-color: #222; /* Dark outside the scrollable area */
+    color: var(--main-text-color);
+    font-family: 'Special Elite', cursive; /* Typewriter-style font */
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     min-height: 100vh;
-    padding: 20px;
+    padding: 0;
+    overflow: hidden; /* FIX: Prevents the body from scrolling and eliminates bounceback */
+}
+
+.scrollable-content {
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto; /* Handles all scrolling */
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    background-color: var(--page-bg);
+    background-image: var(--paper-texture-url);
+    border: 5px solid var(--border-color);
+    box-shadow: 0 0 50px rgba(0,0,0,0.6);
     position: relative;
-    overscroll-behavior-y: none; /* FIX: Prevents weird scroll bounceback on mobile */
 }
 
-/* Background grid effect */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient(0deg, transparent 50%, var(--border-color) 50%),
-                      linear-gradient(90deg, transparent 50%, var(--border-color) 50%);
-    background-size: 20px 20px;
-    opacity: 0.1;
-    z-index: -1;
-    animation: pan-bg 60s infinite linear;
+/* Custom scrollbar for a cleaner look */
+.scrollable-content::-webkit-scrollbar {
+    width: 8px;
 }
 
-/* Vignette effect */
-body::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    box-shadow: inset 0 0 150px var(--dark-bg);
-    pointer-events: none;
-    z-index: -1;
+.scrollable-content::-webkit-scrollbar-track {
+    background: var(--page-bg);
+}
+
+.scrollable-content::-webkit-scrollbar-thumb {
+    background-color: var(--border-color);
+    border-radius: 4px;
+    border: 1px solid var(--page-bg);
 }
 
 /* === Main Container === */
 .container {
     width: 95%;
-    max-width: 900px;
-    background-color: var(--main-bg);
+    max-width: 800px;
+    margin: 40px auto;
     padding: clamp(20px, 5vw, 40px);
+    background: transparent;
     border-radius: var(--radius);
-    box-shadow: 0 10px 40px var(--shadow-color);
-    border: 1px solid var(--border-color);
-    animation: fadeIn 1s ease-out;
     position: relative;
-    z-index: 1;
-}
-
-/* === Page-Specific Layouts === */
-.home-page .container {
-    text-align: center;
+    animation: fadeIn 1s ease-out;
 }
 
 /* === Titles and Typography === */
-.glitch-title {
+.journal-title {
     font-family: 'Creepster', cursive;
-    font-size: clamp(3rem, 8vw, 6rem);
+    font-size: clamp(3rem, 8vw, 5rem);
     text-align: center;
-    color: var(--text-color);
-    margin-bottom: 30px;
-    text-shadow: 0 0 5px var(--highlight-color), 0 0 15px var(--highlight-color);
-    animation: title-glitch 2s infinite linear;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+    text-shadow: 2px 2px var(--main-text-color);
+    letter-spacing: 2px;
+    animation: bleed-in 2s ease-out;
 }
 
 .sub-title {
-    font-family: 'Roboto Mono', monospace;
     font-size: clamp(1.2rem, 3vw, 1.8rem);
-    color: var(--text-color);
-    margin-bottom: 20px;
+    text-align: center;
+    color: var(--secondary-text-color);
+    margin-bottom: 30px;
 }
 
 .page-title {
@@ -122,13 +111,13 @@ body::after {
     margin-bottom: 40px;
 }
 
-.description {
-    line-height: 1.6;
-    color: #b0b0b0;
+.entry-text {
+    line-height: 1.8;
+    color: var(--main-text-color);
     margin-bottom: 20px;
 }
 
-.home-description {
+.home-entry {
     max-width: 600px;
     margin: 0 auto 30px auto;
 }
@@ -144,30 +133,30 @@ body::after {
 
 .btn {
     display: inline-block;
-    padding: 15px 35px;
-    background-color: var(--accent-color);
-    color: #fff;
+    padding: 12px 25px;
+    background-color: var(--border-color);
+    color: var(--page-bg);
     text-decoration: none;
     border-radius: var(--radius);
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 1px;
     transition: all 0.3s ease-in-out;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-    border: 2px solid var(--accent-color);
+    box-shadow: 0 4px 10px var(--shadow-color);
+    border: 1px solid var(--border-color);
     width: clamp(200px, 50%, 300px);
     text-align: center;
 }
 
 .btn:hover {
-    background-color: var(--highlight-color);
-    border-color: var(--highlight-color);
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
 }
 
 .back-btn {
-    color: var(--highlight-color);
+    color: var(--accent-color);
     text-decoration: none;
     font-weight: bold;
     display: inline-block;
@@ -178,91 +167,82 @@ body::after {
 
 .back-btn:hover {
     transform: translateX(-5px);
-    color: var(--text-color);
+    color: var(--border-color);
 }
 
 /* === Video List === */
 .video-list {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    border-radius: var(--radius);
+    background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white to mimic paper */
+    box-shadow: 0 5px 15px var(--shadow-color);
 }
 
 .video-list li {
-    background-color: #1a1a1a;
-    padding: 20px;
-    border-radius: var(--radius);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
-    border: 1px dashed var(--border-color);
-    transition: all 0.3s ease;
+    padding: 15px;
+    border-bottom: 1px dashed var(--secondary-text-color);
+    transition: background-color 0.2s ease;
+}
+
+.video-list li:last-child {
+    border-bottom: none;
 }
 
 .video-list li:hover {
-    transform: scale(1.02);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.7);
-    border-color: var(--highlight-color);
+    background-color: rgba(0, 0, 0, 0.05); /* Subtle hover effect */
 }
 
 .passkey {
     display: block;
     font-weight: 700;
-    color: var(--text-color);
-    font-size: 1.2rem;
+    color: var(--accent-color);
+    font-size: 1.1rem;
     margin-bottom: 5px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
 .video-link {
-    color: var(--highlight-color);
-    text-decoration: none;
+    color: var(--main-text-color);
+    text-decoration: underline;
+    text-decoration-color: var(--secondary-text-color);
     font-size: 0.9rem;
     word-wrap: break-word;
     transition: color 0.3s ease;
 }
 
 .video-link:hover {
-    color: #fff;
-    text-decoration: underline;
+    color: var(--accent-color);
 }
 
-.video-list .description {
+.description {
     font-style: italic;
-    color: #888;
+    color: var(--secondary-text-color);
     margin-top: 10px;
     font-size: 0.8rem;
-    border-top: 1px dashed var(--border-color);
+    border-top: 1px dashed var(--secondary-text-color);
     padding-top: 10px;
 }
 
-
-/* === New Animations === */
+/* === Animations === */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes title-glitch {
-    0%, 100% {
-        text-shadow: 0 0 5px var(--highlight-color), 0 0 15px var(--highlight-color);
-        transform: translate(0);
+@keyframes bleed-in {
+    0% {
+        transform: scale(0.95);
+        opacity: 0;
+        filter: blur(5px);
     }
-    25% {
-        text-shadow: -2px -2px 5px var(--glitch-color-1), 2px 2px 5px var(--glitch-color-2);
-        transform: translate(2px, 2px);
+    100% {
+        transform: scale(1);
+        opacity: 1;
+        filter: blur(0);
     }
-    50% {
-        text-shadow: 2px 2px 5px var(--glitch-color-2), -2px -2px 5px var(--glitch-color-1);
-        transform: translate(-2px, -2px);
-    }
-    75% {
-        text-shadow: 2px -2px 5px var(--glitch-color-1), -2px 2px 5px var(--glitch-color-2);
-        transform: translate(-2px, 2px);
-    }
-}
-
-@keyframes pan-bg {
-    0% { background-position: 0 0; }
-    100% { background-position: -200px -200px; }
 }
